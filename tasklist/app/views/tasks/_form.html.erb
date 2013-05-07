@@ -1,0 +1,42 @@
+<%= form_for(@task) do |f| %>
+  <% if @task.errors.any? %>
+    <div id="error_explanation" class="alert alert-error">
+      <button type="button" class="close" data-dismiss="alert">x</button>
+      <h3>Erro(s) ao gravar</h3>
+      <ul>
+      <% @task.errors.each do |error, message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="control-group">
+	  <div class="field">
+	    <%= f.label :description, 'Descrição', :class => 'control-label' %>
+	    <div class="controls">
+	    	<%= f.text_area :description %>
+	    </div>
+	  </div>
+	  <div class="field">
+	    <%= f.label :status, 'Status', :class => 'control-label' %>
+	    <div class="controls">
+	    	<%= f.select :status, (["Pendente", "Em Andamento", "Concluido"]) %>
+	    </div>
+	  </div>
+	  <div class="field">
+	    <%= f.label :author, 'Autor', :class => 'control-label' %>
+	    <div class="controls">
+	    	<%= f.select :author_id, @authors.collect { |a| [ a.name, a.id ] }  %>
+	    </div>
+	  </div>
+	  <div class="field">
+	    <%= f.label :category, 'Categoria', :class => 'control-label' %>
+	    <div class="controls">
+	    	<%= f.select :category_id, @categories.collect { |c| [ c.name, c.id ] } %>
+	    </div>
+	  </div>
+	  <div class="form-actions">
+	    <%= f.submit "Salvar", :class => "btn btn-primary" %>
+	  </div>
+	  </div>
+<% end %>
